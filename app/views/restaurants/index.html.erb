@@ -4,16 +4,23 @@
 
 <h1>Restaurants</h1>
 
-<div id="restaurants">
- <div id="map"></div>
- map
+<div data-controller="map">
+  <div data-map-target="container" 
+       style="height: 400px;"
+       data-map-latitude-value="35.681236"
+       data-map-longitude-value="139.767125"
+       data-map-zoom-value="13">
+  </div>
 
-  <% @restaurants.each do |restaurant| %>
-    <%= render restaurant %>
-    <p>
-      <%= link_to "Show this restaurant", restaurant %>
-    </p>
-  <% end %>
+  <div id="restaurants">
+    <%= turbo_frame_tag "restaurant-list" do %>
+      <% @restaurants.each do |restaurant| %>
+        <%= turbo_frame_tag dom_id(restaurant) do %>
+          <div><%= restaurant.name %></div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to "New restaurant", new_restaurant_path %>

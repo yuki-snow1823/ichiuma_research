@@ -23,3 +23,26 @@
 <% @restaurant.reviews.each do |review| %>
 <p><%= review.content %></p>
 <% end %>
+
+<div id="map" style="height: 400px;"></div>
+
+<div>
+  <h1><%= @restaurant.name %></h1>
+  <p><%= @restaurant.address %></p>
+  <p>緯度: <%= @restaurant.latitude %></p>
+  <p>経度: <%= @restaurant.longitude %></p>
+</div>
+
+<script>
+document.addEventListener("turbo:load", function() {
+  const map = L.map('map').setView([<%= @restaurant.latitude %>, <%= @restaurant.longitude %>], 15);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  const marker = L.marker([<%= @restaurant.latitude %>, <%= @restaurant.longitude %>]).addTo(map);
+  marker.bindPopup("<b><%= @restaurant.name %></b><br><%= @restaurant.address %>");
+});
+</script>
