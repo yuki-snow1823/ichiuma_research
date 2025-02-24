@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "sass-rails"
+
+gem "tailwindcss-rails", "~> 4.1"
