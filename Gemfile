@@ -64,4 +64,4 @@ end
 
 gem "sass-rails"
 
-gem "tailwindcss-rails", "~> 4.1"
+gem "tailwindcss-rails", "~> 4.2"
